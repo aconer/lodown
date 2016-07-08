@@ -1,0 +1,29 @@
+{
+  "name": "aconer",
+  "version": "1.0.0",
+  "description": "lodown",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- test/ -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aconer/lodown.git"
+  },
+  "author": "aconer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aconer/lodown/issues"
+  },
+  "homepage": "https://github.com/aconer/lodown#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "i": "^0.3.5",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4"
+  }
+}
