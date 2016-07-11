@@ -123,7 +123,7 @@ module.exports.indexOf = indexOf;
  */
 function filter(collection, test){
    var passed = [];
-   _.each(collection, function(value, position, collection){
+    each(collection, function(value, position, collection){
        if(test(value, position, collection)){
            passed.push(value);
        }   
@@ -145,7 +145,7 @@ module.exports.filter = filter;
  * the test.
  */
 function reject(array, test){
-    return _.filter(array, function(value, position, collection){
+    return filter(array, function(value, position, collection){
         return !test(value, position, collection);
     });
 }
@@ -163,7 +163,7 @@ module.exports.reject = reject;
  */
  
 function partition(collection, test){
-    return [_.filter(collection, test), _.reject(collection,test)];
+    return [filter(collection, test), reject(collection,test)];
 }
 module.exports.partition = partition;
 
@@ -177,7 +177,7 @@ module.exports.partition = partition;
  function unique(array){
     var newArray = [];
     for(var i = 0; i < array.length; i++){
-        if(_.indexOf(newArray, array[i]) === -1) newArray.push(array[i]); 
+        if(indexOf(newArray, array[i]) === -1) newArray.push(array[i]); 
     }
     return newArray;
 }
@@ -196,7 +196,7 @@ module.exports.unique = unique;
  
 function map(collection, transform){
     var newArray = [];
-    _.each(collection, function(value, position, collection){
+    each(collection, function(value, position, collection){
         newArray.push(transform(value, position, collection));
     });
     return newArray;
@@ -214,7 +214,7 @@ module.exports.map = map;
  */
 function pluck(array, property){
     var output = [];
-    _.map(array, function(element, i, array){
+    map(array, function(element, i, array){
         output.push(element[property]);
     });
     return output;
@@ -231,7 +231,7 @@ module.exports.pluck = pluck;
  * the array
  */
 function contains(collection, value) {
-    return _.reduce(collection, function(match, item){
+    return reduce(collection, function(match, item){
     return match ? true : item === value;
     }, false);
 }
@@ -254,9 +254,9 @@ module.exports.contains = contains;
 function every(collection, test){
     var result = true;
     if(test === undefined){
-        test = _.identity;
+        test = identity;
     }
-    _.each(collection, function(value, position, collection){
+    each(collection, function(value, position, collection){
        if(test(value, position, collection) === false) return result = false;
     });
     return result;
@@ -279,9 +279,9 @@ module.exports.every = every;
 function some(collection, test) {
     var Yes = false;
     if(test === undefined){
-        test = _.identity;
+        test = identity;
     }
-    _.each(collection, function(element, i, array){
+    each(collection, function(element, i, array){
         test(element, i, array) === true ? Yes = true: Yes;
         });
     return Yes;
@@ -306,11 +306,11 @@ function reduce (collection, fn, start) {
     if (start !== undefined) {
         prev = start;
         
-    _.each(collection, (element, i, col) => prev = fn(prev, element, i));
+    each(collection, (element, i, col) => prev = fn(prev, element, i));
     }
     else {
         prev = collection[0];
-        _.each(collection, (element, i, col) => {
+        each(collection, (element, i, col) => {
             if (i === 0) return;
             prev = fn(prev, element, i);
         });
@@ -328,8 +328,8 @@ module.exports.reduce = reduce;
  */
 
 function extend(objectTo){
-    _.each(arguments, function(objectFrom){
-        _.each(objectFrom, function(value, key){
+    each(arguments, function(objectFrom){
+        each(objectFrom, function(value, key){
            objectTo[key] = value; 
         });      
     });
